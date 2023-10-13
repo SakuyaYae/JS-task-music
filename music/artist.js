@@ -6,7 +6,7 @@ export default class Artist {
   previusBands;
   intrumentsPlayed;
 
-  constructor(artistName, artistInfo, yearBorn, currentBands = [], previusBands = [], intrumentsPlayed) {
+  constructor(artistName, artistInfo, yearBorn, intrumentsPlayed, currentBands = [], previusBands = []) {
     this.artistName = artistName;
     this.artistInfo = artistInfo;
     this.yearBorn = yearBorn;
@@ -26,7 +26,10 @@ export default class Artist {
   displayArtist() {
 
   }
-  calculateAge() {
 
+  calculateAge() {
+    const currentYear = parseInt(Date().substring(11, 16).trim());
+    const age = currentYear - this.yearBorn;
+    return age;
   }
 }
