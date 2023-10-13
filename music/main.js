@@ -48,7 +48,7 @@ while (run) {
       console.log("Not implemented");
       break;
     case 7:
-      console.log("Not implemented");
+      artist.displayArtist();
       break;
 
     case 100:
@@ -60,7 +60,7 @@ while (run) {
       console.log("Invalid input. type a valid number from the menu.");
       displayMenu();
       break;
-
   }
 }
+
 
