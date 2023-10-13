@@ -14,4 +14,19 @@ export default class Artist {
     this.previusBands = previusBands;
     this.intrumentsPlayed = intrumentsPlayed;
   }
+
+  addBand() {
+
+  }
+
+  removeBand() {
+
+  }
+
+  displayArtist() {
+
+  }
+  calculateAge() {
+
+  }
 }
