@@ -13,4 +13,14 @@ export default class Band {
     this.yearDisolved = yearDisolved;
     this.currentMembers = currentMembers;
   }
+
+  addArtist() {
+
+  }
+  removeArtist() {
+
+  }
+  displayBand() {
+
+  }
 }
