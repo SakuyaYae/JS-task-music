@@ -1,4 +1,5 @@
 import Display from "./display.js";
+import Utils from "./utils.js";
 
 export default class Artist {
   #artistName;
@@ -16,15 +17,7 @@ export default class Artist {
     this.#previusBands = previusBands;
     this.#intrumentsPlayed = intrumentsPlayed;
     this.display = new Display();
-  }
-
-
-  addBand() {
-
-  }
-
-  removeBand() {
-
+    this.utils = new Utils();
   }
 
   #calculateAge() {
@@ -44,6 +37,7 @@ export default class Artist {
   getYearBorn() {
     return this.#yearBorn;
   }
+
   getAge() {
     return this.#calculateAge();
   }
