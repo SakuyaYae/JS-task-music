@@ -4,8 +4,8 @@ import prompt from "prompt-sync";
 const userInput = prompt({ sigint: true });
 
 var run = true;
-var artist;
-var band;
+var artist = "";
+var band = "";
 
 function displayMenu() {
   console.log(
@@ -36,7 +36,7 @@ while (run) {
 
     case 3:
       artist = new Artist("Doom", "Doom slayer", 1993, ["Bass", "Drums"]);
-      console.log("Artist created: " + artist.artistName);
+      console.log("Artist created: " + artist.artistName());
       break;
     case 4:
       console.log("Not implemented");
@@ -48,8 +48,14 @@ while (run) {
       console.log("Not implemented");
       break;
     case 7:
-      artist.displayArtist();
-      break;
+      if (artist === "") {
+        console.log("Error: no artists have been created");
+        break;
+      }
+      else {
+        artist.displayArtist();
+        break;
+      }
 
     case 100:
       run = false;
