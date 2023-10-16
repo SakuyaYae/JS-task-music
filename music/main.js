@@ -31,12 +31,12 @@ while (run) {
 
     case 2:
       band = new Band("Slayers", "Argent metalBand", 2016, artist);
-      console.log("Band created: " + band.bandName);
+      console.log("Band created: " + band.getBandName());
       break;
 
     case 3:
       artist = new Artist("Doom", "Doom slayer", 1993, ["Bass", "Drums"]);
-      console.log("Artist created: " + artist.artistName());
+      console.log("Artist created: " + artist.GetArtistName());
       break;
     case 4:
       console.log("Not implemented");
@@ -45,8 +45,15 @@ while (run) {
       console.log("Not implemented");
       break;
     case 6:
-      console.log("Not implemented");
-      break;
+      if (band === "") {
+        console.log("Error: no artists have been created");
+        break;
+      }
+      else {
+        band.displayBand();
+        break;
+      }
+
     case 7:
       if (artist === "") {
         console.log("Error: no artists have been created");
