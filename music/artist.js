@@ -38,7 +38,7 @@ export default class Artist {
     return age;
   }
 
-  get artistName() {
+  getArtistName() {
     return this.#artistName;
   }
 }
