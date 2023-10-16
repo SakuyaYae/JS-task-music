@@ -1,6 +1,3 @@
-import Display from "./display.js";
-import Utils from "./utils.js";
-
 export default class Artist {
   #artistName;
   #artistInfo;
@@ -9,14 +6,13 @@ export default class Artist {
   #previusBands;
   #intrumentsPlayed;
 
-  constructor(artistName = "", artistInfo = "", yearBorn = "", intrumentsPlayed = [], currentBands = [], previusBands = []) {
+  constructor(artistName = "", artistInfo = "", yearBorn = "", intrumentsPlayed = []) {
     this.#artistName = artistName;
     this.#artistInfo = artistInfo;
     this.#yearBorn = yearBorn;
-    this.#currentBands = currentBands;
-    this.#previusBands = previusBands;
+    this.#currentBands = [];
+    this.#previusBands = [];
     this.#intrumentsPlayed = intrumentsPlayed;
-    this.display = new Display();
     this.utils = new Utils();
   }
 
@@ -26,31 +22,19 @@ export default class Artist {
     return age;
   }
 
-  getArtistName() {
-    return this.#artistName;
+  setCurrentBands(bandToChange) {
+    this.#currentBands.push(bandToChange);
   }
 
-  getArtistInfo() {
-    return this.#artistInfo;
+  setPreviusBands(bandToAdd) {
+    this.#previusBands.push(bandToAdd);
   }
 
-  getYearBorn() {
-    return this.#yearBorn;
-  }
-
-  getAge() {
-    return this.#calculateAge();
-  }
-
-  getCurrentBands() {
-    return this.#currentBands;
-  }
-
-  getPreviusBands() {
-    return this.#previusBands;
-  }
-
-  getIntrumentsPlayed() {
-    return this.#intrumentsPlayed;
+  getArtistDataObject() {
+    return {
+      artistName: this.#artistName,
+      artistInfo: this.#artistInfo,
+      yearBorn: this.#yearBorn
+    };
   }
 }

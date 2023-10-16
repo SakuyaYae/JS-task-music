@@ -1,6 +1,3 @@
-import Display from "./display.js";
-import Utils from "./utils.js";
-
 export default class Band {
   #bandName;
   #bandInfo;
@@ -9,37 +6,37 @@ export default class Band {
   #currentMembers;
   #previusMembers;
 
-  constructor(bandName = "", bandInfo = "", yearFounded = "", currentMembers = [], yearDisolved = "") {
+  constructor(bandName = "", bandInfo = "", yearFounded = "") {
     this.#bandName = bandName;
     this.#bandInfo = bandInfo;
     this.#yearFounded = yearFounded;
-    this.#yearDisolved = yearDisolved;
-    this.#currentMembers = currentMembers;
-    this.display = new Display();
-    this.utils = new Utils();
+    this.#yearDisolved = [];
+    this.#currentMembers = [];
+    this.#previusMembers = [];
   }
 
-  getBandName() {
-    return this.#bandName;
+  setCurrentMembers(memberToChange) {
+    this.#currentMembers.push(memberToChange);
   }
 
-  getBandInfo() {
-    return this.#bandInfo;
+  setPreviusMembers(memberToAdd) {
+    this.#previusMembers.push(memberToAdd);
   }
 
-  getYearFounded() {
-    return this.#yearFounded;
-  }
+  getBandDataObject() {
+    if (this.#yearDisolved === "") {
+      return {
+        bandName: this.#bandName,
+        bandInfo: this.#bandInfo,
+        yearFounded: this.#yearFounded
+      };
+    }
+    return {
+      bandName: this.#bandName,
+      bandInfo: this.#bandInfo,
+      yearFounded: this.#yearFounded,
+      yearDisolved: this.#yearDisolved
+    };
 
-  getYearDisolved() {
-    return this.#yearDisolved;
-  }
-
-  getCurrentMembers() {
-    return this.#currentMembers;
-  }
-
-  getPreviusMembers() {
-    return this.#previusMembers;
   }
 }

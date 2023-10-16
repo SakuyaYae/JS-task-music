@@ -1,17 +1,24 @@
-export default class Utils {
-  add(itemToAdd) {
-    const returnArr = [];
-    returnArr.push(itemToAdd);
-    return returnArr;
+import Band from "./band.js";
+import fs from "fs";
+
+export default class ArtistUtils {
+  #bandList = [];
+  constructor() { }
+
+  addArtist(artistName, artistInfo, yearBorn, intrumentsPlayed) {
+    const jsonArtists = fs.readFileSync("./artists.json");
+    const artistJsonList = JSON.parse(jsonArtists);
+    const band = new Band(artistName, artistInfo, yearBorn, intrumentsPlayed);
+    this.#bandList.push(band.getBandDataObject());
   }
 
-  remove(itemToRemove, arrToRemoveFrom) {
-    const index = arrToRemoveFrom.indexOf(itemToRemove);
-    arrToRemoveFrom.splice(index, 1);
-    return arrToRemoveFrom;
+  removBand(indexToRemove) {
+    this.#bandList.splice(indexToRemove, 0);
   }
 
-  display(objectToDisplay) {
-    console.log(objectToDisplay);
+  display() {
+    for (var i; i < this.#bandList; i++) {
+      console.log(this.#bandList[i]);
+    }
   }
 }
