@@ -26,13 +26,13 @@ export default class Artist {
   displayArtist() {
     console.log(` Name: ${this.artistName}
                   About: ${this.artistInfo}
-                  Age: ${this.calculateAge()} Born: ${this.yearBorn}
+                  Age: ${this.#calculateAge()} Born: ${this.yearBorn}
                   Current bands: ${this.currentBands}
                   Previus bands: ${this.previusBands}
                   Instruments ${this.intrumentsPlayed}`)
   }
 
-  calculateAge() {
+  #calculateAge() {
     const currentYear = parseInt(Date().substring(11, 16).trim());
     const age = currentYear - this.yearBorn;
     return age;
