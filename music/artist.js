@@ -6,7 +6,7 @@ export default class Artist {
   #previusBands;
   #intrumentsPlayed;
 
-  constructor(artistName = "", artistInfo = "", yearBorn = "", intrumentsPlayed = []) {
+  constructor(artistName, artistInfo, yearBorn, intrumentsPlayed = []) {
     this.#artistName = artistName;
     this.#artistInfo = artistInfo;
     this.#yearBorn = yearBorn;
@@ -22,6 +22,10 @@ export default class Artist {
     return age;
   }
 
+  getCurrentBands() {
+    return this.#currentBands;
+  }
+
   setCurrentBands(bandToChange) {
     this.#currentBands.push(bandToChange);
   }
@@ -34,7 +38,11 @@ export default class Artist {
     return {
       artistName: this.#artistName,
       artistInfo: this.#artistInfo,
-      yearBorn: this.#yearBorn
+      yearBorn: this.#yearBorn,
+      age: this.#calculateAge(),
+      currentBands: this.#currentBands,
+      previusBands: this.#previusBands,
+      intrumentsPlayed: this.#intrumentsPlayed
     };
   }
 }
