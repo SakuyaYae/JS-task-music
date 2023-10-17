@@ -15,8 +15,18 @@ export default class Band {
     this.#previusMembers = [];
   }
 
-  setCurrentMembers(memberToChange) {
-    this.#currentMembers.push(memberToChange);
+  setCurrentMembers(memberToChange, method = 0) {
+    if (method === 0) {
+      this.#currentMembers.push(memberToChange);
+    }
+    else {
+      this.#currentMembers = memberToChange;
+    }
+
+  }
+
+  getCurrentMembers() {
+    return this.#currentMembers;
   }
 
   setPreviusMembers(memberToAdd) {
@@ -28,14 +38,18 @@ export default class Band {
       return {
         bandName: this.#bandName,
         bandInfo: this.#bandInfo,
-        yearFounded: this.#yearFounded
+        yearFounded: this.#yearFounded,
+        currentMembers: this.#currentMembers,
+        previusMembers: this.#previusMembers
       };
     }
     return {
       bandName: this.#bandName,
       bandInfo: this.#bandInfo,
       yearFounded: this.#yearFounded,
-      yearDisolved: this.#yearDisolved
+      yearDisolved: this.#yearDisolved,
+      currentMembers: this.#currentMembers,
+      previusMembers: this.#previusMembers
     };
 
   }
