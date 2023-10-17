@@ -6,8 +6,8 @@ export default class ArtistUtils {
   constructor() { }
 
   addArtist(artistName, artistInfo, yearBorn, intrumentsPlayed) {
-    const jsonArtists = fs.readFileSync("./artists.json");
-    const artistJsonList = JSON.parse(jsonArtists);
+    const jsonBands = fs.readFileSync("./artists.json");
+    const BandJsonList = JSON.parse(jsonBands);
     const band = new Band(artistName, artistInfo, yearBorn, intrumentsPlayed);
     this.#bandList.push(band.getBandDataObject());
   }
@@ -16,9 +16,29 @@ export default class ArtistUtils {
     this.#bandList.splice(indexToRemove, 0);
   }
 
+  addArtistToBand(artist, indexOfBand) {
+    this.#bandList[indexOfBand].setCurrentMembers(artist);
+  }
+
+  removeArtistFromBand(artist, indexOfBand) {
+    const members = this.#bandList[indexOfBand].getCurrentMembers();
+    const indexOfMember = members.indexOf(artist);
+    const previusMember = members.splice(indexOfMember, 1);
+    this.#bandList[indexOfBand].setCurrentMembers(members, 1);
+    this.#bandList[indexOfBand].setPreviusMembers(previusMember);
+  }
+
   display() {
-    for (var i; i < this.#bandList; i++) {
-      console.log(this.#bandList[i]);
+    if (this.#bandList.length > 0) {
+      for (var i; i < this.#bandList; i++) {
+        console.log(this.#bandList[i]);
+      }
+    }
+    else if (this.#bandList.length === 0) {
+      console.log("There are no bands to display");
+    }
+    else {
+      console.log("An error has happend")
     }
   }
 }
