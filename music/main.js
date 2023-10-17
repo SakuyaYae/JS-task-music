@@ -1,11 +1,9 @@
-import Band from "./band.js";
-import Artist from "./artist.js";
+import Controller from "./controller.js";
 import prompt from "prompt-sync";
 const userInput = prompt({ sigint: true });
 
+const controller = new Controller();
 var run = true;
-var artist = null;
-var band = null;
 
 function displayMenu() {
   console.log(
@@ -13,8 +11,8 @@ function displayMenu() {
       1. Show menu 
       2. add new band 
       3. Add new artist 
-      4. Delete  artist 
-      5. Delete band 
+      4. Delete  band
+      5. Delete artist
       6. Display band 
       7. Display artist 
       8. Add band to artist 
@@ -33,59 +31,44 @@ while (run) {
       break;
 
     case 2:
-      band = new Band("Slayers", "Argent metalBand", 2016, artist);
-      console.log("Band created: " + band.getBandName());
+      controller.addNew("band");
+      console.log("Band created");
       break;
 
     case 3:
-      artist = new Artist("Doom", "Doom slayer", 1993, ["Bass", "Drums"]);
-      console.log("Artist created: " + artist.getArtistName());
+      controller.addNew("artist");
+      console.log("Artist created");
       break;
 
     case 4:
-      if (artist == null || band == null) {
-        console.log("Error: no artists and/or bands have been created");
-        break;
-      }
-      artist.setCurrentBands(artist.utils.remove(band, artist.getCurrentBands()));
+      controller.deleteObject("band");
       break;
+
     case 5:
-      console.log("Not implemented");
+      controller.deleteObject("artist");
       break;
+
     case 6:
-      if (band == null) {
-        console.log("Error: no artists have been created");
-        break;
-      }
-      else {
-        band.utils.display(band.getCurrentMembers());
-        break;
-      }
+      controller.displayData("band");
+      break;
 
     case 7:
-      if (artist == null) {
-        console.log("Error: no artists have been created");
-        break;
-      }
-      else {
-        artist.utils.display(artist.getCurrentBands());
-        break;
-      }
+      controller.displayData("artist");
+      break;
 
     case 8:
-      if (artist == null || band == null) {
-        console.log("Error: no artists and/or bands have been created");
-        break;
-      }
-      artist.setCurrentBands(artist.utils.add(band));
+      controller.addTo("band");
       break;
 
     case 9:
-      if (artist == null || band == null) {
-        console.log("Error: no artists and/or bands have been created");
-        break;
-      }
-      band.setCurrentMembers(band.utils.add(artist));
+      controller.addTo("artist")
+      break;
+    case 10:
+      controller.removeFrom("band");
+      break;
+
+    case 11:
+      controller.removeFrom("artist");
       break;
 
     case 100:
