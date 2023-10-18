@@ -61,11 +61,25 @@ export default class Controller {
   }
 
   deleteObject(objectToDelete) {
+    if (objectToDelete === "band") {
+    }
+    else if (objectToDelete === "artist") {
+    }
 
+    else {
+      console.log("Error wrong value: " + objectToDelete);
+    }
   }
 
   addTo(objectToAdd) {
+    if (objectToAdd === "band") {
+    }
+    else if (objectToAdd === "artist") {
+    }
 
+    else {
+      console.log("Error wrong value: " + objectToAdd);
+    }
   }
 
   removeFrom(objectToRemove) {
