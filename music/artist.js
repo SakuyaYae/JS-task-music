@@ -13,7 +13,6 @@ export default class Artist {
     this.#currentBands = [];
     this.#previusBands = [];
     this.#intrumentsPlayed = intrumentsPlayed;
-    this.utils = new Utils();
   }
 
   #calculateAge() {
@@ -26,8 +25,13 @@ export default class Artist {
     return this.#currentBands;
   }
 
-  setCurrentBands(bandToChange) {
-    this.#currentBands.push(bandToChange);
+  setCurrentBands(bandToChange, method = 0) {
+    if (method === 0) {
+      this.#currentBands.push(bandToChange);
+    }
+    else {
+      this.#currentBands = bandToChange;
+    }
   }
 
   setPreviusBands(bandToAdd) {
