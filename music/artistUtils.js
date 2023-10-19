@@ -32,7 +32,7 @@ export default class ArtistUtils {
   display() {
     if (this.#artistList.length > 0) {
       for (var i; i < this.#artistList; i++) {
-        console.log(this.#artistList[i]);
+        console.log(i + ". " + this.#artistList[i]);
       }
     }
     else if (this.#artistList.length === 0) {

@@ -5,10 +5,10 @@ export default class ArtistUtils {
   #bandList = [];
   constructor() { }
 
-  addArtist(artistName, artistInfo, yearBorn, intrumentsPlayed) {
-    const jsonBands = fs.readFileSync("./artists.json");
-    const BandJsonList = JSON.parse(jsonBands);
-    const band = new Band(artistName, artistInfo, yearBorn, intrumentsPlayed);
+  addBand(bandName, bandInfo, yearFounded, yearDisolved = "") {
+    //const jsonBands = fs.readFileSync("./artists.json");
+    //const BandJsonList = JSON.parse(jsonBands);
+    const band = new Band(bandName, bandInfo, yearFounded, yearDisolved);
     this.#bandList.push(band.getBandDataObject());
   }
 
@@ -31,7 +31,7 @@ export default class ArtistUtils {
   display() {
     if (this.#bandList.length > 0) {
       for (var i; i < this.#bandList; i++) {
-        console.log(this.#bandList[i]);
+        console.log(i + ". " + this.#bandList[i]);
       }
     }
     else if (this.#bandList.length === 0) {
