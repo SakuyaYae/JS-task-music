@@ -6,8 +6,8 @@ export default class ArtistUtils {
   constructor() { }
 
   addArtist(artistName, artistInfo, yearBorn, intrumentsPlayed) {
-    const jsonArtists = fs.readFileSync("./artists.json");
-    const artistJsonList = JSON.parse(jsonArtists);
+    //const jsonArtists = fs.readFileSync("./artists.json");
+    //const artistJsonList = JSON.parse(jsonArtists);
     const artist = new Artist(artistName, artistInfo, yearBorn, intrumentsPlayed);
     this.#artistList.push(artist.getArtistDataObject());
   }
@@ -15,7 +15,6 @@ export default class ArtistUtils {
   removeArtist(indexToRemove) {
     this.#artistList.splice(indexToRemove, 1);
   }
-
 
   addBandToArtist(band, indexOfArtist) {
     this.#artistList[indexOfArtist].setCurrentMembers(band);
@@ -31,8 +30,8 @@ export default class ArtistUtils {
 
   display() {
     if (this.#artistList.length > 0) {
-      for (var i; i < this.#artistList; i++) {
-        console.log(i + ". " + this.#artistList[i]);
+      for (var i = 0; i < this.#artistList.length; i++) {
+        console.log(i + ". " + this.#artistList[i].artistName);
       }
     }
     else if (this.#artistList.length === 0) {
