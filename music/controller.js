@@ -18,15 +18,15 @@ export default class Controller {
       const bandCreateQuestions = [
         "What is the name of the band? ",
         "Type som info about the band ",
-        "when was the band founded? ",
+        "When was the band founded? ",
         "Has the band disoleved? yes/no ",
         "When was the band disolved? "];
       const inputArr = [];
       for (var i = 0; i < bandCreateQuestions.length; i++) {
         console.log(bandCreateQuestions[i]);
         this.#input = userInput().trim().toLowerCase();
-        if (bandCreateQuestions[3] === "no") {
-          continue;
+        if (bandCreateQuestions[i] === bandCreateQuestions[3] && this.#input === "no") {
+          i++;
         }
         inputArr.push(this.#input);
       }
@@ -72,7 +72,7 @@ export default class Controller {
           console.log("error NaN value. type a number from the list.")
         }
         else {
-          this.#bandUtils.removBand(input);
+          this.#bandUtils.removBand(this.#input);
           run = false
         }
       }
@@ -86,7 +86,7 @@ export default class Controller {
           console.log("error NaN value. type a number from the list.")
         }
         else {
-          this.#artistUtils.removeArtist(input);
+          this.#artistUtils.removeArtist(this.#input);
           run = false
         }
       }
@@ -98,25 +98,44 @@ export default class Controller {
 
   addTo(objectToAdd) {
     if (objectToAdd === "band") {
-      console.log("Chose whits band to remove. ");
+      console.log("Chose whits band to add artist to: ");
       this.#bandUtils.display();
       this.#input = parseInt(userInput());
+      var chosenBand = this.#input;
       if (isNaN(this.#input)) {
-        console.log("error NaN value. type a number from the list.")
+        console.log("error NaN value. type a number from the list.");
       }
       else {
-        this.#bandUtils.addArtistToBand(this.#input);
+        console.log("Chose whits artist to add to band: ");
+        this.#artistUtils.display();
+        this.#input = parseInt(userInput());
+        if (isNaN(this.#input)) {
+          console.log("error NaN value. type a number from the list.")
+        }
+        else {
+          this.#bandUtils.addArtistToBand(this.#input, chosenBand);
+        }
+
       }
     }
     else if (objectToAdd === "artist") {
-      console.log("Chose whits artist to remove. ");
+      console.log("Chose whits artist to add band to: ");
       this.#artistUtils.display();
       this.#input = parseInt(userInput());
+      var chosenArtist = this.#input;
       if (isNaN(this.#input)) {
-        console.log("error NaN value. type a number from the list.")
+        console.log("Error NaN value. type a number from the list.")
       }
       else {
-        this.#artistUtils.addBandToArtist(this.#input);
+        console.log("Chose whits band to add to artist: ");
+        this.#bandUtils.display();
+        this.#input = parseInt(userInput());
+        if (isNaN(this.#input)) {
+          console.log("error NaN value. type a number from the list.");
+        }
+        else {
+          this.#artistUtils.addBandToArtist(this.#input, chosenArtist);
+        }
       }
     }
     else {
@@ -133,7 +152,15 @@ export default class Controller {
         console.log("error NaN value. type a number from the list.")
       }
       else {
-        this.#bandUtils.removeArtistFromBand(this.#input);
+        console.log("Chose whits artist to add to band: ");
+        this.#artistUtils.display();
+        this.#input = parseInt(userInput());
+        if (isNaN(this.#input)) {
+          console.log("error NaN value. type a number from the list.")
+        }
+        else {
+          this.#bandUtils.removeArtistFromBand(this.#input);
+        }
       }
     }
     else if (objectToRemove === "artist") {
@@ -144,7 +171,15 @@ export default class Controller {
         console.log("error NaN value. type a number from the list.")
       }
       else {
-        this.#artistUtils.removeBandFromArtist(this.#input);
+        console.log("Chose whits band to add to artist: ");
+        this.#bandUtils.display();
+        this.#input = parseInt(userInput());
+        if (isNaN(this.#input)) {
+          console.log("error NaN value. type a number from the list.");
+        }
+        else {
+          this.#artistUtils.removeBandFromArtist(this.#input);
+        }
       }
     }
     else {
@@ -162,5 +197,10 @@ export default class Controller {
     else {
       console.log("Error wrong value: " + objectToDisplay);
     }
+  }
+
+  writeToJson() {
+    this.#artistUtils.writeArtistListToJson();
+    this.#bandUtils.writeArtistListToJson();
   }
 }
