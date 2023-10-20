@@ -3,17 +3,23 @@ import fs from "fs";
 
 export default class ArtistUtils {
   #bandList = [];
-  constructor() { }
+  constructor() {
+    const jsonBands = fs.readFileSync("./band.json");
+    const bandJsonList = JSON.parse(jsonBands);
+    for (var i = 0; i < bandJsonList.length; i++) {
+      const bandFromJson = new Band(bandJsonList[i].bandName, bandJsonList[i].bandInfo, bandJsonList[i].yearFounded, bandJsonList[i].yearDisolved);
+      this.#bandList.push(bandFromJson.getBandDataObject());
+    }
+
+  }
 
   addBand(bandName, bandInfo, yearFounded, yearDisolved = "") {
-    //const jsonBands = fs.readFileSync("./artists.json");
-    //const BandJsonList = JSON.parse(jsonBands);
     const band = new Band(bandName, bandInfo, yearFounded, yearDisolved);
     this.#bandList.push(band.getBandDataObject());
   }
 
   removBand(indexToRemove) {
-    this.#bandList.splice(indexToRemove, 0);
+    this.#bandList.splice(indexToRemove, 1);
   }
 
   addArtistToBand(artist, indexOfBand) {
@@ -40,5 +46,12 @@ export default class ArtistUtils {
     else {
       console.log("An error has happend")
     }
+  }
+
+  writeArtistListToJson() {
+    fs.writeFileSync('./band.json', JSON.stringify(this.#bandList, null, 2), (err) => {
+      if (err) throw err;
+      console.log("BandList saved");
+    });
   }
 }
