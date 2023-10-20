@@ -30,8 +30,8 @@ export default class ArtistUtils {
 
   display() {
     if (this.#bandList.length > 0) {
-      for (var i; i < this.#bandList; i++) {
-        console.log(i + ". " + this.#bandList[i]);
+      for (var i = 0; i < this.#bandList.length; i++) {
+        console.log(i + ". " + this.#bandList[i].bandName);
       }
     }
     else if (this.#bandList.length === 0) {
