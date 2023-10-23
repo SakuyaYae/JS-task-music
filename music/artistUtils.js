@@ -3,11 +3,18 @@ import fs from "fs";
 
 export default class ArtistUtils {
   #artistList = [];
-  constructor() { }
+  constructor() {
+    const jsonArtists = fs.readFileSync("./artist.json");
+    const artistJsonList = JSON.parse(jsonArtists);
+    console.log("Debug: " + artistJsonList.length)
+    var artistFromJson;
+    for (var i = 0; i < artistJsonList.length; i++) {
+      artistFromJson = new Artist(artistJsonList[i].artistName, artistJsonList[i].artistInfo, artistJsonList[i].yearBorn, artistJsonList[i].intrumentsPlayed);
+      this.#artistList.push(artistFromJson.getArtistDataObject());
+    }
+  }
 
   addArtist(artistName, artistInfo, yearBorn, intrumentsPlayed) {
-    //const jsonArtists = fs.readFileSync("./artists.json");
-    //const artistJsonList = JSON.parse(jsonArtists);
     const artist = new Artist(artistName, artistInfo, yearBorn, intrumentsPlayed);
     this.#artistList.push(artist.getArtistDataObject());
   }
@@ -17,15 +24,19 @@ export default class ArtistUtils {
   }
 
   addBandToArtist(band, indexOfArtist) {
-    this.#artistList[indexOfArtist].setCurrentMembers(band);
+    this.#artistList[indexOfArtist].currentBands.push(band);
   }
 
   removeBandFromArtist(band, indexOfArtist) {
-    const bands = this.#artistList[indexOfArtist].getCurrentBands();
+    const bands = this.#artistList[indexOfArtist].currentBands[band];
     const indexOfBand = bands.indexOf(band);
     const previusBand = bands.splice(indexOfBand, 1);
     this.#artistList[indexOfArtist].setCurrentBands(bands, 1);
     this.#artistList[indexOfArtist].setPreviusBands(previusBand);
+  }
+
+  getArtistObject(indexOfArtist) {
+    return this.#artistList[indexOfArtist];
   }
 
   display() {
@@ -40,5 +51,12 @@ export default class ArtistUtils {
     else {
       console.log("An error has happend");
     }
+  }
+
+  writeArtistListToJson() {
+    fs.writeFileSync('./artist.json', JSON.stringify(this.#artistList, null, 2), (err) => {
+      if (err) throw err;
+      console.log("ArtistList saved");
+    });
   }
 }

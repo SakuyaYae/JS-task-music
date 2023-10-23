@@ -101,7 +101,7 @@ export default class Controller {
       console.log("Chose whits band to add artist to: ");
       this.#bandUtils.display();
       this.#input = parseInt(userInput());
-      var chosenBand = this.#input;
+      const chosenBand = this.#input;
       if (isNaN(this.#input)) {
         console.log("error NaN value. type a number from the list.");
       }
@@ -113,16 +113,18 @@ export default class Controller {
           console.log("error NaN value. type a number from the list.")
         }
         else {
-          this.#bandUtils.addArtistToBand(this.#input, chosenBand);
+          const bandToAddToArtist = this.#bandUtils.getBandObject(chosenBand);
+          const artistToAddToBand = this.#artistUtils.getArtistObject(this.#input);
+          this.#bandUtils.addArtistToBand(artistToAddToBand, chosenBand);
+          this.#artistUtils.addBandToArtist(bandToAddToArtist, this.#input);
         }
-
       }
     }
     else if (objectToAdd === "artist") {
       console.log("Chose whits artist to add band to: ");
       this.#artistUtils.display();
       this.#input = parseInt(userInput());
-      var chosenArtist = this.#input;
+      const chosenArtist = this.#input;
       if (isNaN(this.#input)) {
         console.log("Error NaN value. type a number from the list.")
       }
@@ -134,7 +136,10 @@ export default class Controller {
           console.log("error NaN value. type a number from the list.");
         }
         else {
-          this.#artistUtils.addBandToArtist(this.#input, chosenArtist);
+          const bandToAddToArtist = this.#bandUtils.getBandObject(this.#input);
+          const artistToAddToBand = this.#artistUtils.getArtistObject(chosenArtist);
+          this.#artistUtils.addBandToArtist(bandToAddToArtist, chosenArtist);
+          this.#bandUtils.addArtistToBand(artistToAddToBand, this.#input);
         }
       }
     }

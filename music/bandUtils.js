@@ -23,15 +23,18 @@ export default class ArtistUtils {
   }
 
   addArtistToBand(artist, indexOfBand) {
-    this.#bandList[indexOfBand].setCurrentMembers(artist);
+    this.#bandList[indexOfBand].currentMembers.push(artist);
   }
 
   removeArtistFromBand(artist, indexOfBand) {
-    const members = this.#bandList[indexOfBand].getCurrentMembers();
+    const members = this.#bandList[indexOfBand].currentMembers[artist];
     const indexOfMember = members.indexOf(artist);
     const previusMember = members.splice(indexOfMember, 1);
     this.#bandList[indexOfBand].setCurrentMembers(members, 1);
     this.#bandList[indexOfBand].setPreviusMembers(previusMember);
+  }
+  getBandObject(indexOfBand) {
+    return this.#bandList[indexOfBand];
   }
 
   display() {
