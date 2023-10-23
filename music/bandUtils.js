@@ -22,19 +22,32 @@ export default class ArtistUtils {
     this.#bandList.splice(indexToRemove, 1);
   }
 
-  addArtistToBand(artist, indexOfBand) {
-    this.#bandList[indexOfBand].currentMembers.push(artist);
+  addArtistToBand(artist, indexOfBand, artistName) {
+    if (artist > this.#bandList.length) {
+      console.log("Error: index of artist dose not exist");
+    }
+    else if (indexOfBand > this.#bandList.length) {
+      console.log("Error: index of band dose not exist");
+    }
+    else {
+      this.#bandList[indexOfBand].currentMembers.push("Artist Id: " + artist + " Artist name " + artistName);
+    }
   }
 
   removeArtistFromBand(artist, indexOfBand) {
-    const members = this.#bandList[indexOfBand].currentMembers[artist];
-    const indexOfMember = members.indexOf(artist);
-    const previusMember = members.splice(indexOfMember, 1);
-    this.#bandList[indexOfBand].setCurrentMembers(members, 1);
-    this.#bandList[indexOfBand].setPreviusMembers(previusMember);
-  }
-  getBandObject(indexOfBand) {
-    return this.#bandList[indexOfBand];
+    if (artist > this.#bandList.length) {
+      console.log("Error: index of artist dose not exist");
+    }
+    else if (indexOfBand > this.#bandList.length) {
+      console.log("Error: index of band dose not exist");
+    }
+    else {
+      const members = this.#bandList[indexOfBand].currentMembers[artist];
+      const indexOfMember = members.indexOf(artist);
+      const previusMember = members.splice(indexOfMember, 1);
+      this.#bandList[indexOfBand].currentMembers = members;
+      this.#bandList[indexOfBand].previusMembers.push(previusMember);
+    }
   }
 
   display() {
@@ -49,6 +62,14 @@ export default class ArtistUtils {
     else {
       console.log("An error has happend")
     }
+  }
+
+  getBandObject(indexOfBand) {
+    return this.#bandList[indexOfBand].bandName;
+  }
+
+  showMembersInBand(indexOfBand) {
+    console.log(this.#bandList[indexOfBand].currentMembers);
   }
 
   writeArtistListToJson() {

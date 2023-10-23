@@ -6,10 +6,8 @@ export default class ArtistUtils {
   constructor() {
     const jsonArtists = fs.readFileSync("./artist.json");
     const artistJsonList = JSON.parse(jsonArtists);
-    console.log("Debug: " + artistJsonList.length)
-    var artistFromJson;
     for (var i = 0; i < artistJsonList.length; i++) {
-      artistFromJson = new Artist(artistJsonList[i].artistName, artistJsonList[i].artistInfo, artistJsonList[i].yearBorn, artistJsonList[i].intrumentsPlayed);
+      const artistFromJson = new Artist(artistJsonList[i].artistName, artistJsonList[i].artistInfo, artistJsonList[i].yearBorn, artistJsonList[i].intrumentsPlayed);
       this.#artistList.push(artistFromJson.getArtistDataObject());
     }
   }
@@ -23,20 +21,40 @@ export default class ArtistUtils {
     this.#artistList.splice(indexToRemove, 1);
   }
 
-  addBandToArtist(band, indexOfArtist) {
-    this.#artistList[indexOfArtist].currentBands.push(band);
+  addBandToArtist(band, indexOfArtist, bandName) {
+    if (indexOfArtist > this.#artistList.length) {
+      console.log("Error: index of artist dose not exist");
+    }
+    else if (band > this.#artistList.length) {
+      console.log("Error: index of band dose not exist");
+    }
+    else {
+      this.#artistList[indexOfArtist].currentBands.push("Id: " + band + " Band name " + bandName);
+    }
   }
 
   removeBandFromArtist(band, indexOfArtist) {
-    const bands = this.#artistList[indexOfArtist].currentBands[band];
-    const indexOfBand = bands.indexOf(band);
-    const previusBand = bands.splice(indexOfBand, 1);
-    this.#artistList[indexOfArtist].setCurrentBands(bands, 1);
-    this.#artistList[indexOfArtist].setPreviusBands(previusBand);
+    if (indexOfArtist > this.#artistList.length) {
+      console.log("Error: index of artist dose not exist");
+    }
+    else if (band > this.#artistList.length) {
+      console.log("Error: index of band dose not exist");
+    }
+    else {
+      const bands = this.#artistList[indexOfArtist].currentBands[band];
+      const indexOfBand = bands.indexOf(band);
+      const previusBand = bands.splice(indexOfBand, 1);
+      this.#artistList[indexOfArtist].setCurrentBands(bands, 1);
+      this.#artistList[indexOfArtist].setPreviusBands(previusBand);
+    }
   }
 
   getArtistObject(indexOfArtist) {
-    return this.#artistList[indexOfArtist];
+    return this.#artistList[indexOfArtist].artistName;
+  }
+
+  showBandsInArtist(indexOfArtist) {
+    console.log(this.#artistList[indexOfArtist]);
   }
 
   display() {
