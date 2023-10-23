@@ -17,7 +17,7 @@ export default class Artist {
 
   #calculateAge() {
     const currentYear = parseInt(Date().substring(11, 16).trim());
-    const age = currentYear - this.#yearBorn;
+    const age = currentYear - this.#yearBorn.substring(0, 4).trim();
     return age;
   }
 

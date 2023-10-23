@@ -6,12 +6,12 @@ export default class Band {
   #currentMembers;
   #previusMembers;
 
-  constructor(bandName, bandInfo, yearFounded, yearDisolved = "") {
+  constructor(bandName, bandInfo, yearFounded, currentMembers, yearDisolved = "") {
     this.#bandName = bandName;
     this.#bandInfo = bandInfo;
     this.#yearFounded = yearFounded;
     this.#yearDisolved = yearDisolved;
-    this.#currentMembers = [];
+    this.#currentMembers = currentMembers;
     this.#previusMembers = [];
   }
 

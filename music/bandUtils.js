@@ -7,14 +7,14 @@ export default class ArtistUtils {
     const jsonBands = fs.readFileSync("./band.json");
     const bandJsonList = JSON.parse(jsonBands);
     for (var i = 0; i < bandJsonList.length; i++) {
-      const bandFromJson = new Band(bandJsonList[i].bandName, bandJsonList[i].bandInfo, bandJsonList[i].yearFounded, bandJsonList[i].yearDisolved);
+      const bandFromJson = new Band(bandJsonList[i].bandName, bandJsonList[i].bandInfo, bandJsonList[i].yearFounded, bandJsonList[i].currentMembers, bandJsonList[i].yearDisolved);
       this.#bandList.push(bandFromJson.getBandDataObject());
     }
 
   }
 
-  addBand(bandName, bandInfo, yearFounded, yearDisolved = "") {
-    const band = new Band(bandName, bandInfo, yearFounded, yearDisolved);
+  addBand(bandName, bandInfo, yearFounded, currentMembers, yearDisolved = "") {
+    const band = new Band(bandName, bandInfo, yearFounded, currentMembers, yearDisolved);
     this.#bandList.push(band.getBandDataObject());
   }
 
@@ -23,26 +23,23 @@ export default class ArtistUtils {
   }
 
   addArtistToBand(artist, indexOfBand, artistName) {
-    if (artist > this.#bandList.length) {
-      console.log("Error: index of artist dose not exist");
-    }
-    else if (indexOfBand > this.#bandList.length) {
+    if (indexOfBand > this.#bandList.length) {
       console.log("Error: index of band dose not exist");
     }
+    else if (indexOfBand < 0) {
+      return ["Artist Id: " + artist + " Artist name: " + artistName];
+    }
     else {
-      this.#bandList[indexOfBand].currentMembers.push("Artist Id: " + artist + " Artist name " + artistName);
+      this.#bandList[indexOfBand].currentMembers.push("Artist Id: " + artist + " Artist name: " + artistName);
     }
   }
 
   removeArtistFromBand(artist, indexOfBand) {
-    if (artist > this.#bandList.length) {
-      console.log("Error: index of artist dose not exist");
-    }
-    else if (indexOfBand > this.#bandList.length) {
+    if (indexOfBand > this.#bandList.length) {
       console.log("Error: index of band dose not exist");
     }
     else {
-      const members = this.#bandList[indexOfBand].currentMembers[artist];
+      const members = this.#bandList[indexOfBand].currentMembers;
       const indexOfMember = members.indexOf(artist);
       const previusMember = members.splice(indexOfMember, 1);
       this.#bandList[indexOfBand].currentMembers = members;
@@ -62,6 +59,10 @@ export default class ArtistUtils {
     else {
       console.log("An error has happend")
     }
+  }
+
+  getLatestBand() {
+    return this.#bandList.length - 1;
   }
 
   getBandObject(indexOfBand) {

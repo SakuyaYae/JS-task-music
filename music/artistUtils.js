@@ -25,11 +25,8 @@ export default class ArtistUtils {
     if (indexOfArtist > this.#artistList.length) {
       console.log("Error: index of artist dose not exist");
     }
-    else if (band > this.#artistList.length) {
-      console.log("Error: index of band dose not exist");
-    }
     else {
-      this.#artistList[indexOfArtist].currentBands.push("Id: " + band + " Band name " + bandName);
+      this.#artistList[indexOfArtist].currentBands.push("Id: " + band + " Band name: " + bandName);
     }
   }
 
@@ -41,7 +38,7 @@ export default class ArtistUtils {
       console.log("Error: index of band dose not exist");
     }
     else {
-      const bands = this.#artistList[indexOfArtist].currentBands[band];
+      const bands = this.#artistList[indexOfArtist].currentBands;
       const indexOfBand = bands.indexOf(band);
       const previusBand = bands.splice(indexOfBand, 1);
       this.#artistList[indexOfArtist].setCurrentBands(bands, 1);
