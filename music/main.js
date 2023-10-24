@@ -19,67 +19,66 @@ function displayMenu() {
       9. Add artist to band
       10. Remove band from artist
       11. Remove artist artist from band
-      100. Quit the program`
+      Q. Quit the program`
   );
 }
 function main() {
-
-
   displayMenu();
+
   while (run) {
-    switch (parseInt(userInput().trim())) {
-      case 1:
+    switch (userInput().trim().toLowerCase()) {
+      case "1":
         displayMenu();
         break;
 
-      case 2:
+      case "2":
         controller.addNew("band");
         console.log("Band created");
         break;
 
-      case 3:
+      case "3":
         controller.addNew("artist");
         console.log("Artist created");
         break;
 
-      case 4:
+      case "4":
         controller.deleteObject("band");
         break;
 
-      case 5:
+      case "5":
         controller.deleteObject("artist");
         break;
 
-      case 6:
+      case "6":
         controller.displayData("band");
         break;
 
-      case 7:
+      case "7":
         controller.displayData("artist");
         break;
 
-      case 8:
+      case "8":
         controller.addTo("band");
         break;
 
-      case 9:
+      case "9":
         controller.addTo("artist")
         break;
-      case 10:
+      case "10":
         controller.removeFrom("band");
         break;
 
-      case 11:
+      case "11":
         controller.removeFrom("artist");
         break;
 
-      case 100:
+      case "q":
         run = false;
         console.log("Program has been quit.");
         break;
 
       default:
-        console.log("Invalid input. type a valid number from the menu.");
+        console.log("Invalid input. Type a valid number from the menu.");
         displayMenu();
         break;
     }
