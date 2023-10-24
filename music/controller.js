@@ -31,7 +31,10 @@ export default class Controller {
           this.#input = userInput().trim().toLowerCase();
           artistToAdd.push(this.#input);
           const artistToAddToBand = this.#artistUtils.getArtistObject(this.#input);
-          this.#input = this.#bandUtils.addArtistToBand(this.#input, -1, artistToAddToBand);
+          const artistInstrument = this.#artistUtils.getArtistInstrument(this.#input);
+          console.log("In what year did the artist join? ")
+          const yearJoined = userInput().trim().toLowerCase();
+          this.#input = this.#bandUtils.addArtistToBand(artistToAdd[0], -1, artistToAddToBand, artistInstrument, yearJoined);
         }
         else {
           this.#input = userInput().trim().toLowerCase();
