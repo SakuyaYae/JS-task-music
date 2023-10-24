@@ -34,15 +34,12 @@ export default class ArtistUtils {
     if (indexOfArtist > this.#artistList.length) {
       console.log("Error: index of artist dose not exist");
     }
-    else if (band > this.#artistList.length) {
-      console.log("Error: index of band dose not exist");
-    }
     else {
       const bands = this.#artistList[indexOfArtist].currentBands;
       const indexOfBand = bands.indexOf(band);
       const previusBand = bands.splice(indexOfBand, 1);
-      this.#artistList[indexOfArtist].setCurrentBands(bands, 1);
-      this.#artistList[indexOfArtist].setPreviusBands(previusBand);
+      this.#artistList[indexOfArtist].currentBands = bands;
+      this.#artistList[indexOfArtist].previusBands.push(previusBand);
     }
   }
 
@@ -51,13 +48,16 @@ export default class ArtistUtils {
   }
 
   showBandsInArtist(indexOfArtist) {
-    console.log(this.#artistList[indexOfArtist]);
+    console.log(this.#artistList[indexOfArtist].currentBands);
   }
 
+  getArtistListLength() {
+    return this.#artistList.length;
+  }
   display() {
     if (this.#artistList.length > 0) {
       for (var i = 0; i < this.#artistList.length; i++) {
-        console.log(i + ". " + this.#artistList[i].artistName);
+        console.log(this.#artistList[i]);
       }
     }
     else if (this.#artistList.length === 0) {
