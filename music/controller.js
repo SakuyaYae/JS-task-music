@@ -84,6 +84,9 @@ export default class Controller {
         if (isNaN(this.#input)) {
           console.log("error NaN value. type a number from the list.")
         }
+        else if (this.#bandUtils.getBandListLength() < this.#input) {
+          console.log("Index out of bounds");
+        }
         else {
           this.#bandUtils.removBand(this.#input);
           run = false
@@ -97,6 +100,9 @@ export default class Controller {
         this.#input = parseInt(userInput());
         if (isNaN(this.#input)) {
           console.log("error NaN value. type a number from the list.")
+        }
+        else if (this.#artistUtils.getArtistListLength() < this.#input) {
+          console.log("index out of bounds");
         }
         else {
           this.#artistUtils.removeArtist(this.#input);
@@ -117,6 +123,9 @@ export default class Controller {
       const chosenBand = this.#input;
       if (isNaN(this.#input)) {
         console.log("error NaN value. type a number from the list.");
+      }
+      else if (this.#bandUtils.getBandListLength() < this.#input) {
+        console.log("index out of bounds");
       }
       else {
         console.log("Chose whits artist to add to band: ");
@@ -140,6 +149,9 @@ export default class Controller {
       const chosenArtist = this.#input;
       if (isNaN(this.#input)) {
         console.log("Error NaN value. type a number from the list.")
+      }
+      else if (this.#artistUtils.getArtistListLength() < this.#input) {
+        console.log("index out of bounds");
       }
       else {
         console.log("Chose whits band to add to artist: ");
@@ -169,6 +181,9 @@ export default class Controller {
       if (isNaN(this.#input)) {
         console.log("error NaN value. type a number from the list.")
       }
+      else if (this.#artistUtils.getArtistListLength() < this.#input) {
+        console.log("error Index out of bounds");
+      }
       else {
         const chosenBand = this.#input;
         console.log("Chose whits artist to remove from band: ");
@@ -176,6 +191,9 @@ export default class Controller {
         this.#input = parseInt(userInput());
         if (isNaN(this.#input)) {
           console.log("error NaN value. type a number from the list.")
+        }
+        else if (this.#bandUtils.getBandListLength() < this.#input) {
+
         }
         else {
           this.#bandUtils.removeArtistFromBand(this.#input, chosenBand);
@@ -191,8 +209,9 @@ export default class Controller {
         console.log("error NaN value. type a number from the list.")
       }
       else {
-        console.log("Chose whits band to add to artist: ");
-        this.#bandUtils.display();
+        console.log("Chose whits band to remove from artist: ");
+        const chosenArtist = this.#input;
+        this.#artistUtils.showBandsInArtist(chosenArtist);
         this.#input = parseInt(userInput());
         if (isNaN(this.#input)) {
           console.log("error NaN value. type a number from the list.");
