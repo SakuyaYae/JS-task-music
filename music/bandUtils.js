@@ -34,6 +34,10 @@ export default class ArtistUtils {
     }
   }
 
+  getBandListLength() {
+    return this.#bandList.length;
+  }
+
   removeArtistFromBand(artist, indexOfBand) {
     if (indexOfBand > this.#bandList.length) {
       console.log("Error: index of band dose not exist");
@@ -50,7 +54,7 @@ export default class ArtistUtils {
   display() {
     if (this.#bandList.length > 0) {
       for (var i = 0; i < this.#bandList.length; i++) {
-        console.log(i + ". " + this.#bandList[i].bandName);
+        console.log(this.#bandList[i]);
       }
     }
     else if (this.#bandList.length === 0) {
