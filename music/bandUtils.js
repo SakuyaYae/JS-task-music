@@ -22,15 +22,15 @@ export default class ArtistUtils {
     this.#bandList.splice(indexToRemove, 1);
   }
 
-  addArtistToBand(artist, indexOfBand, artistName) {
+  addArtistToBand(artist, indexOfBand, artistName, artistInstrument, yearJoined) {
     if (indexOfBand > this.#bandList.length) {
       console.log("Error: index of band dose not exist");
     }
     else if (indexOfBand < 0) {
-      return ["Artist Id: " + artist + " Artist name: " + artistName];
+      return [`Artist Id: ${artist} Artist name: ${artistName} Instrument played: ${artistInstrument} Joined in ${yearJoined} `];
     }
     else {
-      this.#bandList[indexOfBand].currentMembers.push("Artist Id: " + artist + " Artist name: " + artistName);
+      this.#bandList[indexOfBand].currentMembers.push(`Artist Id: ${artist} Artist name: ${artistName} Instrument played: ${artistInstrument} Joined in ${yearJoined} `);
     }
   }
 
