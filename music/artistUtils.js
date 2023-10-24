@@ -47,6 +47,10 @@ export default class ArtistUtils {
     return this.#artistList[indexOfArtist].artistName;
   }
 
+  getArtistInstrument(indexOfArtist) {
+    return this.#artistList[indexOfArtist].intrumentsPlayed;
+  }
+
   showBandsInArtist(indexOfArtist) {
     console.log(this.#artistList[indexOfArtist].currentBands);
   }
