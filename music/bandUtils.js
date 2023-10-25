@@ -38,11 +38,12 @@ export default class ArtistUtils {
     return this.#bandList.length;
   }
 
-  removeArtistFromBand(artist, indexOfBand) {
+  removeArtistFromBand(artist, indexOfBand, yearLeft) {
     if (indexOfBand > this.#bandList.length) {
       console.log("Error: index of band dose not exist");
     }
     else {
+      this.#bandList[indexOfBand].currentMembers += (" " + yearLeft);
       const members = this.#bandList[indexOfBand].currentMembers;
       const indexOfMember = members.indexOf(artist);
       const previusMember = members.splice(indexOfMember, 1);
