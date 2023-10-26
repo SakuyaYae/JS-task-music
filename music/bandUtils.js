@@ -43,12 +43,18 @@ export default class ArtistUtils {
       console.log("Error: index of band dose not exist");
     }
     else {
-      this.#bandList[indexOfBand].currentMembers += (" " + yearLeft);
-      const members = this.#bandList[indexOfBand].currentMembers;
-      const indexOfMember = members.indexOf(artist);
-      const previusMember = members.splice(indexOfMember, 1);
-      this.#bandList[indexOfBand].currentMembers = members;
-      this.#bandList[indexOfBand].previusMembers.push(previusMember);
+      if (this.#bandList[indexOfBand].currentMembers.length < 1) {
+        console.log("No artists in band: ");
+      }
+      else {
+        const members = this.#bandList[indexOfBand].currentMembers;
+        const indexOfMember = members.indexOf(artist);
+        const previusMember = members.splice(indexOfMember, 1);
+        this.#bandList[indexOfBand].currentMembers = members;
+        this.#bandList[indexOfBand].previusMembers.push(previusMember);
+        const lastIndex = this.#bandList[indexOfBand].previusMembers.length - 1;
+        this.#bandList[indexOfBand].previusMembers[lastIndex] += " Left band in: " + yearLeft
+      }
     }
   }
 
