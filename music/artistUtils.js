@@ -35,11 +35,16 @@ export default class ArtistUtils {
       console.log("Error: index of artist dose not exist");
     }
     else {
-      const bands = this.#artistList[indexOfArtist].currentBands;
-      const indexOfBand = bands.indexOf(band);
-      const previusBand = bands.splice(indexOfBand, 1);
-      this.#artistList[indexOfArtist].currentBands = bands;
-      this.#artistList[indexOfArtist].previusBands.push(previusBand);
+      if (this.#artistList[indexOfArtist].currentBands.length < 1) {
+        console.log("Artist is not a member of any bands");
+      }
+      else {
+        const bands = this.#artistList[indexOfArtist].currentBands;
+        const indexOfBand = bands.indexOf(band);
+        const previusBand = bands.splice(indexOfBand, 1);
+        this.#artistList[indexOfArtist].currentBands = bands;
+        this.#artistList[indexOfArtist].previusBands.push(previusBand);
+      }
     }
   }
 
