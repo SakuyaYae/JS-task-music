@@ -140,8 +140,11 @@ export default class Controller {
         else {
           const bandToAddToArtist = this.#bandUtils.getBandObject(chosenBand);
           const artistToAddToBand = this.#artistUtils.getArtistObject(this.#input);
+          const artistInstrument = this.#artistUtils.getArtistInstrument(this.#input);
+          console.log("In what year did the artist join? ")
+          const yearJoined = userInput().trim();
           this.#bandUtils.addArtistToBand(this.#input, chosenBand, artistToAddToBand);
-          this.#artistUtils.addBandToArtist(chosenBand, this.#input, bandToAddToArtist);
+          this.#artistUtils.addBandToArtist(chosenBand, this.#input, bandToAddToArtist, artistInstrument, yearJoined);
         }
       }
     }
@@ -166,8 +169,11 @@ export default class Controller {
         else {
           const bandToAddToArtist = this.#bandUtils.getBandObject(this.#input);
           const artistToAddToBand = this.#artistUtils.getArtistObject(chosenArtist);
+          const artistInstrument = this.#artistUtils.getArtistInstrument(chosenArtist);
+          console.log("In what year did the artist join? ")
+          const yearJoined = userInput().trim();
           this.#artistUtils.addBandToArtist(this.#input, chosenArtist, bandToAddToArtist);
-          this.#bandUtils.addArtistToBand(chosenArtist, this.#input, artistToAddToBand);
+          this.#bandUtils.addArtistToBand(chosenArtist, this.#input, artistToAddToBand, artistInstrument, yearJoined);
         }
       }
     }
